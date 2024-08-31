@@ -128,7 +128,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "jit_matrix", "" ],
-					"patching_rect" : [ 80.0, 367.0, 124.0, 22.0 ],
+					"patching_rect" : [ 87.0, 422.0, 124.0, 22.0 ],
 					"text" : "jit.gl.layer vignette-ctx"
 				}
 
@@ -178,7 +178,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "jit_gl_texture", "", "" ],
-					"patching_rect" : [ 80.0, 321.0, 246.0, 22.0 ],
+					"patching_rect" : [ 87.0, 376.0, 246.0, 22.0 ],
 					"text" : "jit.gl.pass node @file vignette.jxp @quality hi",
 					"textfile" : 					{
 						"filename" : "vignette.jxp",
@@ -226,6 +226,19 @@
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 115.0, 273.0, 150.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"attr" : "center",
+					"id" : "obj-26",
+					"maxclass" : "attrui",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 128.0, 314.0, 193.0, 22.0 ]
 				}
 
 			}
@@ -299,6 +312,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-18", 0 ],
 					"source" : [ "obj-23", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"source" : [ "obj-26", 0 ]
 				}
 
 			}

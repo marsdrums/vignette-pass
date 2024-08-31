@@ -6,6 +6,7 @@
 	<param name="falloff" type="float" default="0.25" />
 	<param name="anamorphic" type="int" default="1" />
 	<param name="expand" type="float" default="1.0" />
+	<param name="center" type="vec2" default="0.0 0.0" />
 	<language name="glsl" version="1.5">
 		<bind param="tex0" program="fp" />
 		<bind param="uv" program="vp" />
@@ -13,6 +14,7 @@
 		<bind param="falloff" program="vp" />
 		<bind param="anamorphic" program="vp" />
 		<bind param="expand" program="fp" />
+		<bind param="center" program="vp" />
 		<program name="vp" type="vertex"  >
 <![CDATA[
 #version 330 core
@@ -21,6 +23,7 @@ in vec2 uv;
 uniform vec2 texDim;
 uniform int anamorphic;
 uniform float falloff;
+uniform vec2 center;
 
 out jit_PerVertex {
 	smooth vec2 coord;
@@ -30,7 +33,7 @@ out jit_PerVertex {
 void main(void) {
 	gl_Position = vec4(uv*2 - 1, 0, 1);
 	vec2 dim = anamorphic == 1 ? vec2(1.0) : texDim;
-	jit_out.coord = gl_Position.xy * vec2( max(dim.x/dim.y, 1.0), max(dim.y/dim.x, 1.0) );
+	jit_out.coord = (gl_Position.xy - center) * vec2( max(dim.x/dim.y, 1.0), max(dim.y/dim.x, 1.0) );
 	jit_out.falloff2 = falloff*falloff;
 
 }

@@ -6,7 +6,9 @@
 	<param name="falloff" type="float" default="0.25" />
 	<param name="anamorphic" type="int" default="1" />
 	<param name="expand" type="float" default="1.0" />
+	<param name="exposure" type="float" default="1.0" />
 	<param name="center" type="vec2" default="0.0 0.0" />
+	<param name="bars" type="float" default="0.0" />
 	<language name="glsl" version="1.5">
 		<bind param="tex0" program="fp" />
 		<bind param="uv" program="vp" />
@@ -14,7 +16,9 @@
 		<bind param="falloff" program="vp" />
 		<bind param="anamorphic" program="vp" />
 		<bind param="expand" program="fp" />
+		<bind param="exposure" program="fp" />
 		<bind param="center" program="vp" />
+		<bind param="bars" program="fp" />
 		<program name="vp" type="vertex"  >
 <![CDATA[
 #version 330 core
@@ -26,12 +30,15 @@ uniform float falloff;
 uniform vec2 center;
 
 out jit_PerVertex {
+	smooth float snorm_y;
 	smooth vec2 coord;
 	flat float falloff2;
 } jit_out;
 
 void main(void) {
+	
 	gl_Position = vec4(uv*2 - 1, 0, 1);
+	jit_out.snorm_y = gl_Position.y;
 	vec2 dim = anamorphic == 1 ? vec2(1.0) : texDim;
 	jit_out.coord = (gl_Position.xy - center) * vec2( max(dim.x/dim.y, 1.0), max(dim.y/dim.x, 1.0) );
 	jit_out.falloff2 = falloff*falloff;
@@ -44,6 +51,7 @@ void main(void) {
 #version 330 core
 
 in jit_PerVertex {
+	smooth float snorm_y;
 	smooth vec2 coord;
 	flat float falloff2;
 } jit_in;
@@ -51,14 +59,14 @@ in jit_PerVertex {
 layout (location = 0) out vec4 outColor;
 
 uniform samplerJit0 tex0;
-uniform float expand;
-
+uniform float expand, exposure, bars;
 
 void main(void) {
 
 	vec3 img = texelFetch(tex0, ivec2(gl_FragCoord.xy)).rgb;
 	float rf = pow(dot(jit_in.coord, jit_in.coord), expand) * jit_in.falloff2 + 1;
-    img *= 1.0 / (rf * rf);
+    img *= exposure / (rf * rf);
+    img *= 1 - abs(jit_in.snorm_y) > bars ? 1.0 : 0.0;
 
 	outColor = vec4(img, 1.0);
 }

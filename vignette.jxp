@@ -1,10 +1,12 @@
 <jitterpass>
     <pass name="vignette">
 
-        <bind name="falloff" param="falloff" type="float" default="0.8" />
+        <bind name="falloff" param="falloff" type="float" default="2.0" />
         <bind name="anamorphic" param="anamorphic" type="int" default="1" />
-        <bind name="expand" param="expand" type="float" default="1.0" />
+        <bind name="expand" param="expand" type="float" default="2.0" />
+        <bind name="exposure" param="exposure" type="float" default="1.0" />
         <bind name="center" param="center" type="vec2" default="0.0 0.0" />
+        <bind name="bars" param="bars" type="float" default="0.0" />
         <subpass file="vignette.jxs">
             <input source="COLOR" />
         </subpass>

@@ -40,11 +40,36 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-39",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 141.0, 275.0, 70.0, 22.0 ],
+					"text" : "loadmess 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-38",
+					"maxclass" : "toggle",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 111.0, 274.0, 24.0, 24.0 ],
+					"svg" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-37",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 244.5, 275.0, 82.0, 20.0 ],
+					"patching_rect" : [ 251.0, 233.0, 82.0, 20.0 ],
 					"text" : "vignette falloff"
 				}
 
@@ -89,7 +114,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 325.5, 452.0, 147.0, 20.0 ],
-					"presentation_linecount" : 5,
 					"text" : "cinematic black bars [0; 1]"
 				}
 
@@ -144,7 +168,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 262.0, 310.0, 199.0, 20.0 ],
+					"patching_rect" : [ 266.0, 309.0, 199.0, 20.0 ],
 					"text" : "circular/anamorphic vignette [0 or 1]"
 				}
 
@@ -301,7 +325,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 86.5, 274.0, 150.0, 22.0 ]
+					"patching_rect" : [ 93.0, 232.0, 150.0, 22.0 ]
 				}
 
 			}
@@ -314,7 +338,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 107.0, 309.0, 150.0, 22.0 ]
+					"patching_rect" : [ 111.0, 308.0, 150.0, 22.0 ]
 				}
 
 			}
@@ -473,13 +497,27 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-15", 0 ],
+					"source" : [ "obj-38", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-38", 0 ],
+					"source" : [ "obj-39", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
 					"source" : [ "obj-4", 0 ]
 				}
 
 			}
  ],
-		"originid" : "pat-29",
+		"originid" : "pat-59",
 		"dependency_cache" : [  ],
 		"autosave" : 0
 	}
